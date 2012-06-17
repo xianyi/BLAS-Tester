@@ -1,0 +1,12 @@
+*.obj
+*.lib
+*.dll
+*.def
+*.o
+*.so
+*.a
+.svn
+*~
+mylib/mylib.a
+mylib/*.o
+bin/*

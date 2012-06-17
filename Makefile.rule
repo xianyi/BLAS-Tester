@@ -1,0 +1,58 @@
+#
+# configuration
+#
+
+#
+# Default compiler
+# Supports gcc & icc.
+#
+ CC = gcc
+# CC = icc
+ FC = gfortran
+
+#
+# CPU architecture
+#
+# For i386 and x86-64 (default)
+# ARCH = X86
+#
+# For Loongson CPU
+# ARCH = loongson
+# 
+# For SW1600 CPU
+# ARCH = sw1600
+
+
+# define BINARY=32 or BINARY=64
+#
+# BINARY=64
+
+
+# the path to BLAS library
+#
+# TEST_BLAS = /your/path/libopenblas.a
+
+# The size of Level 2 Cache (default = 4M)
+# 4M=4194304 6M=6291456 8M=8388608 12M=12582912
+#
+# L2SIZE = 4194304
+
+# The number of threads (default = 1)
+#
+# NUMTHREADS = 1
+
+# Use OPENMP
+#
+# USE_OPENMP = 1
+
+# BLAS interface is compiled by ifort
+#
+# F_INTERFACE_INTEL = 1
+
+# Use 64-bit int
+#
+# INTERFACE64 = 1
+
+# Debug the library
+#
+# DEBUG = 1
