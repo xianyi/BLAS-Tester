@@ -28,7 +28,7 @@ ifndef TEST_BLAS
 TEST_BLAS	= /opt/OpenBLAS/lib/libopenblas.a
 endif
 
-BLASLIB = $(TEST_BLAS) ./mylib/mylib.a
+BLASLIB = ./mylib/mylib.a $(TEST_BLAS) 
 
 
 ifndef NUMTHREADS
