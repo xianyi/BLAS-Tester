@@ -1563,15 +1563,24 @@ xzl3blastst_pt : $(INCdir)/atlas_type.h zl3blastst_pt.o $(PTzL3lib) prepare
 
 
 
+./refblas/librefblas.a : 
+	$(MAKE) -C refblas all
 
+./refblas_perf/librefblas_perf.a : 
+	$(MAKE) -C refblas_perf all
 
-./mylib/mylib.a : 
-	$(MAKE) -C mylib all
-prepare : ./mylib/mylib.a
+ifdef ONLY_PERFORMANCE
+refblas: ./refblas_perf/librefblas_perf.a
+else
+refblas: ./refblas/librefblas.a
+endif
+
+prepare : refblas
 	-mkdir -p $(GENlib) $(GENbin)
 
 clean :
-	$(MAKE) -C mylib clean
+	$(MAKE) -C refblas_perf clean
+	$(MAKE) -C refblas clean
 	rm -rf *.o
 #$(GENlib) *.o
 

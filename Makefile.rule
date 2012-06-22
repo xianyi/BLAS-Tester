@@ -56,3 +56,8 @@
 # Debug the library
 #
 # DEBUG = 1
+
+# Reference Level-3 BLAS is very slow. If you only want test 
+# the performance, please use this flag.  
+#
+# ONLY_PERFORMANCE=1

@@ -1,16 +1,13 @@
 TOPDIR = ..
 include $(TOPDIR)/Makefile.system
 
-TARGET=mylib.a
+TARGET=librefblas_perf.a
 #FC=gfortran
 FFLAGS = $(ICCFLAGS)
 #FFLAGS=-O3 
 #ifeq ($(ARCH), mips64)
 #FFLAGS +=-march=mips64 -mabi=64
 #endif
-AR=ar
-ARFLAGS=cr
-RANLIB=ranlib
 
 
 MYLIB_FILES:=caxpycf.f   chbmvf.f    cpotrff.f   csyr2kf.f  dasumf.f   dmaxf.f    dsprf.f    dtrsvf.f   iqmaxf.f   scamaxf.f  slaswpf.f  sspmvf.f   strmvf.f    zgemvf.f    zhpmvf.f   zswapf.f ztrsvf.f \

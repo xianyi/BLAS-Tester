@@ -28,8 +28,11 @@ ifndef TEST_BLAS
 TEST_BLAS	= /opt/OpenBLAS/lib/libopenblas.a
 endif
 
-BLASLIB = ./mylib/mylib.a $(TEST_BLAS) 
-
+ifndef ONLY_PERFORMANCE
+BLASLIB = ./refblas/librefblas.a $(TEST_BLAS) 
+else
+BLASLIB = ./refblas_perf/librefblas_perf.a $(TEST_BLAS) 
+endif
 
 ifndef NUMTHREADS
 NUMTHREADS	=	1
@@ -108,3 +111,8 @@ ifeq ($(DEBUG), 1)
 else
 	ICCFLAGS += -O3
 endif
+
+
+AR=ar
+ARFLAGS=cr
+RANLIB=ranlib
