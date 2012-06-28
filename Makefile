@@ -5,12 +5,21 @@ include $(TOPDIR)/Makefile.system
 INCdep		=	$(INCdir)/*.h
 
 
-
+ifndef NO_EXTENSION
+PTsL1lib += ATL_sf77amin.o 
+STsL1lib += ATL_sf77amin.o 
+PTdL1lib += ATL_df77amin.o 
+STdL1lib += ATL_df77amin.o 
+PTcL1lib += ATL_cf77amin.o 
+STcL1lib += ATL_cf77amin.o 
+PTzL1lib += ATL_zf77amin.o 
+STzL1lib += ATL_zf77amin.o 
+endif
 
 
 PTsL1lib	=	ATL_sf77rotg.o ATL_sf77rot.o ATL_sf77rotmg.o ATL_sf77rotm.o ATL_sf77swap.o \
 				ATL_sf77scal.o ATL_sf77copy.o ATL_sf77axpy.o ATL_sf77dot.o ATL_sdsf77dot.o \
-				ATL_dsf77dot.o ATL_sf77nrm2.o ATL_sf77asum.o ATL_sf77amax.o ATL_sf77amin.o ATL_sf77rotgf.o \
+				ATL_dsf77dot.o ATL_sf77nrm2.o ATL_sf77asum.o ATL_sf77amax.o ATL_sf77rotgf.o \
 				ATL_sf77rotf.o ATL_sf77rotmgf.o ATL_sf77rotmf.o ATL_sf77swapf.o ATL_sf77scalf.o \
 				ATL_sf77copyf.o ATL_sf77axpyf.o ATL_sf77dotf.o ATL_sdsf77dotf.o	ATL_dsf77dotf.o \
 				ATL_sf77nrm2f.o ATL_sf77asumf.o ATL_sf77amaxf.o ATL_sf77aminf.o ATL_ptflushcache.o ATL_sinfnrm.o \
@@ -18,7 +27,7 @@ PTsL1lib	=	ATL_sf77rotg.o ATL_sf77rot.o ATL_sf77rotmg.o ATL_sf77rotm.o ATL_sf77s
 				ATL_svdiff.o
 STsL1lib	=	ATL_sf77rotg.o ATL_sf77rot.o ATL_sf77rotmg.o ATL_sf77rotm.o ATL_sf77swap.o \
 				ATL_sf77scal.o ATL_sf77copy.o ATL_sf77axpy.o ATL_sf77dot.o ATL_sdsf77dot.o \
-				ATL_dsf77dot.o ATL_sf77nrm2.o ATL_sf77asum.o ATL_sf77amax.o ATL_sf77amin.o ATL_sf77rotgf.o \
+				ATL_dsf77dot.o ATL_sf77nrm2.o ATL_sf77asum.o ATL_sf77amax.o ATL_sf77rotgf.o \
 				ATL_sf77rotf.o ATL_sf77rotmgf.o ATL_sf77rotmf.o ATL_sf77swapf.o ATL_sf77scalf.o \
 				ATL_sf77copyf.o ATL_sf77axpyf.o ATL_sf77dotf.o ATL_sdsf77dotf.o	ATL_dsf77dotf.o \
 				ATL_sf77nrm2f.o ATL_sf77asumf.o ATL_sf77amaxf.o ATL_sf77aminf.o ATL_flushcache.o ATL_sinfnrm.o \
@@ -26,42 +35,42 @@ STsL1lib	=	ATL_sf77rotg.o ATL_sf77rot.o ATL_sf77rotmg.o ATL_sf77rotm.o ATL_sf77s
 
 PTdL1lib	=	ATL_df77rotg.o ATL_df77rot.o ATL_df77rotmg.o ATL_df77rotm.o ATL_df77swap.o \
 				ATL_df77scal.o ATL_df77copy.o ATL_df77axpy.o ATL_df77dot.o ATL_df77nrm2.o \
-				ATL_df77asum.o ATL_df77amax.o ATL_df77amin.o ATL_df77rotgf.o ATL_df77rotf.o ATL_df77rotmgf.o \
+				ATL_df77asum.o ATL_df77amax.o ATL_df77rotgf.o ATL_df77rotf.o ATL_df77rotmgf.o \
 				ATL_df77rotmf.o ATL_df77swapf.o ATL_df77scalf.o ATL_df77copyf.o ATL_df77axpyf.o \
 				ATL_df77dotf.o ATL_df77nrm2f.o ATL_df77asumf.o ATL_df77amaxf.o ATL_df77aminf.o ATL_ptflushcache.o \
 				ATL_rand.o ATL_log2tlaunch.o ATL_thread_join.o ATL_thread_start.o \
 				ATL_thread_exit.o ATL_dvdiff.o ATL_dinfnrm.o
 STdL1lib	=	ATL_df77rotg.o ATL_df77rot.o ATL_df77rotmg.o ATL_df77rotm.o ATL_df77swap.o \
 				ATL_df77scal.o ATL_df77copy.o ATL_df77axpy.o ATL_df77dot.o ATL_df77nrm2.o \
-				ATL_df77asum.o ATL_df77amax.o ATL_df77amin.o ATL_df77rotgf.o ATL_df77rotf.o ATL_df77rotmgf.o \
+				ATL_df77asum.o ATL_df77amax.o ATL_df77rotgf.o ATL_df77rotf.o ATL_df77rotmgf.o \
 				ATL_df77rotmf.o ATL_df77swapf.o ATL_df77scalf.o ATL_df77copyf.o ATL_df77axpyf.o \
 				ATL_df77dotf.o ATL_df77nrm2f.o ATL_df77asumf.o ATL_df77amaxf.o ATL_df77aminf.o ATL_flushcache.o \
 				ATL_rand.o ATL_dvdiff.o ATL_dinfnrm.o 
 
 PTcL1lib	=	ATL_cf77rotg.o ATL_cf77rot.o ATL_cf77swap.o ATL_cf77scal.o ATL_cf77rscal.o \
 				ATL_cf77copy.o ATL_cf77axpy.o ATL_cf77dotu.o ATL_cf77dotc.o ATL_cf77nrm2.o \
-				ATL_cf77asum.o ATL_cf77amax.o ATL_cf77amin.o ATL_cf77rotgf.o ATL_cf77rotf.o ATL_cf77swapf.o \
+				ATL_cf77asum.o ATL_cf77amax.o ATL_cf77rotgf.o ATL_cf77rotf.o ATL_cf77swapf.o \
 				ATL_cf77scalf.o ATL_cf77rscalf.o ATL_cf77copyf.o ATL_cf77axpyf.o ATL_cf77dotuf.o \
 				ATL_cf77dotcf.o ATL_cf77nrm2f.o ATL_cf77asumf.o ATL_cf77amaxf.o ATL_cf77aminf.o ATL_ptflushcache.o \
 				ATL_rand.o ATL_log2tlaunch.o ATL_thread_join.o ATL_thread_start.o ATL_thread_exit.o \
 				ATL_cvdiff.o ATL_cinfnrm.o
 STcL1lib	=	ATL_cf77rotg.o ATL_cf77rot.o ATL_cf77swap.o ATL_cf77scal.o ATL_cf77rscal.o \
 				ATL_cf77copy.o ATL_cf77axpy.o ATL_cf77dotu.o ATL_cf77dotc.o ATL_cf77nrm2.o \
-				ATL_cf77asum.o ATL_cf77amax.o ATL_cf77amin.o ATL_cf77rotgf.o ATL_cf77rotf.o ATL_cf77swapf.o \
+				ATL_cf77asum.o ATL_cf77amax.o ATL_cf77rotgf.o ATL_cf77rotf.o ATL_cf77swapf.o \
 				ATL_cf77scalf.o ATL_cf77rscalf.o ATL_cf77copyf.o ATL_cf77axpyf.o ATL_cf77dotuf.o \
 				ATL_cf77dotcf.o ATL_cf77nrm2f.o ATL_cf77asumf.o ATL_cf77aminf.o ATL_cf77amaxf.o ATL_flushcache.o \
 				ATL_rand.o ATL_cvdiff.o ATL_cinfnrm.o
 
 PTzL1lib	=	ATL_zf77rotg.o ATL_zf77rot.o ATL_zf77swap.o ATL_zf77scal.o ATL_zf77rscal.o \
 				ATL_zf77copy.o ATL_zf77axpy.o ATL_zf77dotu.o ATL_zf77dotc.o ATL_zf77nrm2.o \
-				ATL_zf77asum.o ATL_zf77amax.o ATL_zf77amin.o ATL_zf77rotgf.o ATL_zf77rotf.o ATL_zf77swapf.o \
+				ATL_zf77asum.o ATL_zf77amax.o ATL_zf77rotgf.o ATL_zf77rotf.o ATL_zf77swapf.o \
 				ATL_zf77scalf.o ATL_zf77rscalf.o ATL_zf77copyf.o ATL_zf77axpyf.o ATL_zf77dotuf.o \
 				ATL_zf77dotcf.o ATL_zf77nrm2f.o ATL_zf77asumf.o ATL_zf77amaxf.o ATL_zf77aminf.o ATL_ptflushcache.o \
 				ATL_rand.o ATL_log2tlaunch.o ATL_thread_join.o ATL_thread_start.o ATL_thread_exit.o \
 				ATL_zvdiff.o ATL_zinfnrm.o
 STzL1lib	=	ATL_zf77rotg.o ATL_zf77rot.o ATL_zf77swap.o ATL_zf77scal.o ATL_zf77rscal.o \
 				ATL_zf77copy.o ATL_zf77axpy.o ATL_zf77dotu.o ATL_zf77dotc.o ATL_zf77nrm2.o \
-				ATL_zf77asum.o ATL_zf77amax.o ATL_zf77amin.o ATL_zf77rotgf.o ATL_zf77rotf.o ATL_zf77swapf.o \
+				ATL_zf77asum.o ATL_zf77amax.o ATL_zf77rotgf.o ATL_zf77rotf.o ATL_zf77swapf.o \
 				ATL_zf77scalf.o ATL_zf77rscalf.o ATL_zf77copyf.o ATL_zf77axpyf.o ATL_zf77dotuf.o \
 				ATL_zf77dotcf.o ATL_zf77nrm2f.o ATL_zf77asumf.o ATL_zf77amaxf.o ATL_zf77aminf.o ATL_flushcache.o \
 				ATL_rand.o ATL_zvdiff.o ATL_zinfnrm.o

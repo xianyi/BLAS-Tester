@@ -295,7 +295,11 @@ Mjoin( ASD, dot )(       N, B,  X, iX, Y, iY                        )
 enum LVL1_ROUT /* 16 + 1 = 17 */
 {
    AXPY=0, COPY, SWAP, ROT, ROTM, DOTU, DOTC, DSDOT, SDSDOT, ROTG,
-   ROTMG, NRM2, ASUM, AMAX, AMIN, SCAL, RSCAL, ALLROUTS
+   ROTMG, NRM2, ASUM, AMAX, 
+#ifndef NO_EXTENSION
+AMIN, 
+#endif
+   SCAL, RSCAL, ALLROUTS
 };
 
 static struct timeval tp;
@@ -937,7 +941,9 @@ double opbl1
    else if( ROUT == ASUM   ) { muls = 0.0;           adds = 2.0 * en;   }
                            /* Absolute value + test counted as 2 adds */
    else if( ROUT == AMAX   ) { muls = 0.0;           adds = 2.0 * en;   }
+#ifndef NO_EXTENSION
    else if( ROUT == AMIN   ) { muls = 0.0;           adds = 2.0 * en;   }
+#endif
    else if( ROUT == SCAL   ) { muls = en;            adds = 0.0;        }
                          /* A little bit of cheating for real scaling */
    else if( ROUT == RSCAL  ) { muls = 0.0;           adds = en;         }
@@ -1518,6 +1524,7 @@ TYPE maxtst
 
 }
 
+#ifndef NO_EXTENSION
 TYPE mintst
 (
    const int                  CACHESIZE,
@@ -1603,6 +1610,7 @@ TYPE mintst
    return( resid );
 
 }
+#endif
 
 TYPE scltst
 (
@@ -3092,6 +3100,7 @@ int maxcase
    return( passed );
 }
 
+#ifndef NO_EXTENSION
 int mincase
 (
    const int                  CACHESIZE,
@@ -3181,7 +3190,7 @@ int mincase
 
    return( passed );
 }
-
+#endif
 
 int sclcase
 (
@@ -4413,7 +4422,7 @@ void RunmaxCase
    }
 }
 
-
+#ifndef NO_EXTENSION
 void RunminCase
 (
    const int                  CACHESIZE,
@@ -4469,7 +4478,7 @@ void RunminCase
       }
    }
 }
-
+#endif
 
 void RunsclCase
 (
@@ -5134,11 +5143,13 @@ void RunCases
          RunmaxCase( CACHESIZE, ROUTS[ro], TEST, MFLOP, N0, NN, NINC, NINCX,
 		     INCXS, eps, &np, &ntests );
       }
+#ifndef NO_EXTENSION
       else if( ROUTS[ro] == AMIN  )
       {
          RunminCase( CACHESIZE, ROUTS[ro], TEST, MFLOP, N0, NN, NINC, NINCX,
 		     INCXS, eps, &np, &ntests );
       }
+#endif
 	  else if( ROUTS[ro] == SCAL )
       {
          RunsclCase( CACHESIZE, ROUTS[ro], TEST, MFLOP, N0, NN, NINC, NALPHA,
@@ -5427,7 +5438,12 @@ void GetFlags
                (*ROUTS)[ 0] = AXPY;  (*ROUTS)[ 1] = COPY;  (*ROUTS)[ 2] = SWAP;
                (*ROUTS)[ 3] = ROTG;  (*ROUTS)[ 4] = ROT;   (*ROUTS)[ 5] = SCAL;
                (*ROUTS)[ 6] = NRM2;  (*ROUTS)[ 7] = ASUM;  (*ROUTS)[ 8] = AMAX;
+#ifndef NO_EXTENSION
 			   (*ROUTS)[ 9] = AMIN;
+#else
+                           (*ROUTS)[ 9] = AMAX; //repeat...
+#endif
+
 #if   defined( SREAL )
                (*ROUTS)[10] = ROTMG; (*ROUTS)[11] = ROTM;  (*ROUTS)[12] = DOTC;
                (*ROUTS)[13] = DSDOT; (*ROUTS)[14] = SDSDOT;
@@ -5477,9 +5493,11 @@ void GetFlags
                   else if( ( strcmp( ARGS[i], "AMAX"   ) == 0 ) ||
                            ( strcmp( ARGS[i], "amax"   ) == 0 ) )
                      (*ROUTS)[j] = AMAX;
+#ifndef NO_EXTENSION
                   else if( ( strcmp( ARGS[i], "AMIN"   ) == 0 ) ||
                            ( strcmp( ARGS[i], "amin"   ) == 0 ) )
                      (*ROUTS)[j] = AMIN;
+#endif
 #if   defined( SREAL )
                   else if( ( strcmp( ARGS[i], "ROTMG"  ) == 0 ) ||
                            ( strcmp( ARGS[i], "rotmg"  ) == 0 ) )

@@ -61,3 +61,8 @@
 # the performance, please use this flag.  
 #
 # ONLY_PERFORMANCE=1
+
+# Don't test i?amin level 1 BLAS function.
+# If you test ATLAS, please use this flag
+#
+# NO_EXTENSION=1 
