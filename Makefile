@@ -5,16 +5,6 @@ include $(TOPDIR)/Makefile.system
 INCdep		=	$(INCdir)/*.h
 
 
-ifndef NO_EXTENSION
-PTsL1lib += ATL_sf77amin.o 
-STsL1lib += ATL_sf77amin.o 
-PTdL1lib += ATL_df77amin.o 
-STdL1lib += ATL_df77amin.o 
-PTcL1lib += ATL_cf77amin.o 
-STcL1lib += ATL_cf77amin.o 
-PTzL1lib += ATL_zf77amin.o 
-STzL1lib += ATL_zf77amin.o 
-endif
 
 
 PTsL1lib	=	ATL_sf77rotg.o ATL_sf77rot.o ATL_sf77rotmg.o ATL_sf77rotm.o ATL_sf77swap.o \
@@ -209,6 +199,17 @@ STzL3lib	=	ATL_zf77gemm.o ATL_zf77symm.o ATL_zf77syr2k.o ATL_zf77syrk.o ATL_zf77
 				ATL_zvdiff.o ATL_zinfnrm.o ATL_ztrnrm1.o ATL_zgediffnrm1.o ATL_zgenrm1.o \
 				ATL_zsynrm.o ATL_zhenrm.o
 
+
+ifndef NO_EXTENSION
+PTsL1lib += ATL_sf77amin.o 
+STsL1lib += ATL_sf77amin.o 
+PTdL1lib += ATL_df77amin.o 
+STdL1lib += ATL_df77amin.o 
+PTcL1lib += ATL_cf77amin.o 
+STcL1lib += ATL_cf77amin.o 
+PTzL1lib += ATL_zf77amin.o 
+STzL1lib += ATL_zf77amin.o 
+endif
 
 
 all : lvl1 lvl2 lvl3 prepare
