@@ -66,3 +66,8 @@
 # If you test ATLAS, please use this flag
 #
 # NO_EXTENSION=1 
+
+# To test BLAS invalid reading.
+#
+#
+# TEST_INVALID_READ=1

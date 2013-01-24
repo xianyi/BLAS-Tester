@@ -48,6 +48,9 @@
 #define    THRESH                        50.0
 #endif
 
+#ifndef TAILING_ELEMENTS
+#define TAILING_ELEMENTS 4
+#endif  
 /* #define    ATLAS_DEBUG */
 /*
  * =====================================================================
@@ -2282,6 +2285,9 @@ TYPE dottst
    TYPE                       * X = NULL, * Y = NULL, * x, * y;
    const int                  aincX = Mabs( INCX ), aincY = Mabs( INCY );
    int                        Xseed, Yseed;
+#ifdef TEST_INVALID_READ
+   int i=0;
+#endif
 
    *TTRUST0 = *TTEST0 = *MFTEST0 = *MFTRUST0 = 0.0;
    if( N == 0 ) { return( ATL_rzero ); }
@@ -2291,9 +2297,17 @@ TYPE dottst
  * Allocate L2 cache space, X, Y and Y0
  */
    l2ret = ATL_flushcache( CACHESIZE );
+#ifndef TEST_INVALID_READ
    X  = (TYPE   *)malloc( ATL_MulBySize( N ) * aincX );
    Y  = (TYPE   *)malloc( ATL_MulBySize( N ) * aincY );
-
+#else
+  /*
+   * To test whether BLAS is invalid accessing, reading the elements beyond
+   * the boundary. We will fill input vectors with NaN.
+   */
+   X  = (TYPE   *)malloc( ATL_MulBySize( N + TAILING_ELEMENTS) * aincX );
+   Y  = (TYPE   *)malloc( ATL_MulBySize( N + TAILING_ELEMENTS) * aincY );
+#endif
    if( ( X == NULL ) || ( Y == NULL ) )
    {
       l2ret = ATL_flushcache( 0 );
@@ -2301,6 +2315,13 @@ TYPE dottst
       if( Y ) free( Y );
       return( ATL_rnone );
    }
+
+#ifdef TEST_INVALID_READ
+   for(i=0; i<N + TAILING_ELEMENTS; i++){
+     X[i]=Y[i]=NAN;
+   }
+#endif
+
 /*
  * Generate random operands
  */
