@@ -404,7 +404,8 @@ TYPE       swptst
 TYPE       dottst
 (  const int CACHESIZE,
    const enum LVL1_ROUT,           const int,      const int,
-   const int,      const int,      const TYPE,     double *,
+   const int,      const int,      const TYPE,     const int,
+   const int,      double *,
    double *,       double *,       double * );
 TYPE       rottst
 (  const int CACHESIZE,
@@ -485,6 +486,7 @@ int        dotcase
 (  const int CACHESIZE,
    const enum LVL1_ROUT,           const int,      const int,
    const int,      const int,      const int,      const TYPE,
+   const int,      const int,
    double *,       double *,       double *,       double * );
 int        rotcase
 (  const int CACHESIZE,
@@ -569,6 +571,7 @@ void       RundotCase
    const enum LVL1_ROUT,           const int,      const int,
    const int,      const int,      const int,      const int,
    const int *,    const int,      const int *,    const TYPE,
+   const int ,    const int,
    int *,          int * );
 void       RunrotCase
 (  const int CACHESIZE,
@@ -589,7 +592,7 @@ void       RunCases
 (  const int,      const int,      const int,      const int,
    const int,      const int,      const int,      const TYPE *,
    const int,      const int *,    const int,      const int *,
-   const int,      const enum LVL1_ROUT * );
+   const int,      const enum LVL1_ROUT * , const int, const int);
 
 void       PrintUsage
 (  char * );
@@ -598,7 +601,7 @@ void       GetFlags
 (  int,            char **,        int *,          enum LVL1_ROUT **,
    int *,          int *,          int *,          int *,
    int *,          int *,          int *,          TYPE **,
-   int *,          int **,         int *,          int ** );
+   int *,          int **,         int *,          int ** , int*, int*);
 
 int        main
 (  int,             char ** );
@@ -2265,6 +2268,8 @@ TYPE dottst
    const int                  INCX,
    const int                  INCY,
    const TYPE                 EPSILON,
+   const int                  x_offset,
+   const int                  y_offset,
    double                     * TTRUST0,
    double                     * TTEST0,
    double                     * MFTRUST0,
@@ -2283,6 +2288,7 @@ TYPE dottst
    TYPE                       te_dotx[2], tr_dotx[2];
 #endif
    TYPE                       * X = NULL, * Y = NULL, * x, * y;
+   TYPE                       * X_old = NULL, * Y_old = NULL;
    const int                  aincX = Mabs( INCX ), aincY = Mabs( INCY );
    int                        Xseed, Yseed;
 #ifdef TEST_INVALID_READ
@@ -2298,15 +2304,15 @@ TYPE dottst
  */
    l2ret = ATL_flushcache( CACHESIZE );
 #ifndef TEST_INVALID_READ
-   X  = (TYPE   *)malloc( ATL_MulBySize( N ) * aincX );
-   Y  = (TYPE   *)malloc( ATL_MulBySize( N ) * aincY );
+   X  = (TYPE   *)malloc( ATL_MulBySize( N + x_offset ) * aincX );
+   Y  = (TYPE   *)malloc( ATL_MulBySize( N + y_offset ) * aincY );
 #else
   /*
    * To test whether BLAS is invalid accessing, reading the elements beyond
    * the boundary. We will fill input vectors with NaN.
    */
-   X  = (TYPE   *)malloc( ATL_MulBySize( N + TAILING_ELEMENTS) * aincX );
-   Y  = (TYPE   *)malloc( ATL_MulBySize( N + TAILING_ELEMENTS) * aincY );
+   X  = (TYPE   *)malloc( ATL_MulBySize( N + x_offset + TAILING_ELEMENTS) * aincX );
+   Y  = (TYPE   *)malloc( ATL_MulBySize( N + y_offset + TAILING_ELEMENTS) * aincY );
 #endif
    if( ( X == NULL ) || ( Y == NULL ) )
    {
@@ -2317,10 +2323,19 @@ TYPE dottst
    }
 
 #ifdef TEST_INVALID_READ
-   for(i=0; i<N + TAILING_ELEMENTS; i++){
-     X[i]=Y[i]=NAN;
+   for(i=0; i<(N + x_offset + TAILING_ELEMENTS)*aincX; i++){
+     X[i]=NAN;
+   }
+   for(i=0; i<(N + y_offset + TAILING_ELEMENTS)*aincY; i++){
+     Y[i]=NAN;
    }
 #endif
+
+   //Set offset of vectors
+   X_old = X;
+   Y_old = Y;
+   X = X+x_offset;
+   Y = Y+y_offset;
 
 /*
  * Generate random operands
@@ -2434,7 +2449,7 @@ TYPE dottst
  */
    l2ret  = ATL_flushcache( 0 );
 
-   if( !( TEST ) ) { free( X ); free( Y ); return( ATL_rzero ); }
+   if( !( TEST ) ) { free( X_old ); free( Y_old ); return( ATL_rzero ); }
 
 /*
  * else perform error check - Ensure the difference of the output operands
@@ -2443,11 +2458,11 @@ TYPE dottst
 
    normX =  Mjoin( PATL, infnrm )( N, X, aincX );
    if( normX == ATL_rzero ) normX = ATL_rone;
-   free( X );
+   free( X_old );
 
    normY =  Mjoin( PATL, infnrm )( N, Y, aincY );
    if( normY == ATL_rzero ) normY = ATL_rone;
-   free( Y );
+   free( Y_old );
 
 #if   defined( SREAL )
    if( ( ROUT == DOTU ) || ( ROUT == DOTC ) || ( ROUT == SDSDOT ) )
@@ -3747,6 +3762,8 @@ int dotcase
    const int                  INCX,
    const int                  INCY,
    const TYPE                 EPSILON,
+   const int                  x_offset,
+   const int                  y_offset,
    double                     * TTRUST0,
    double                     * TTEST0,
    double                     * MFTRUST0,
@@ -3772,7 +3789,7 @@ int dotcase
 
    if( ( MEGA * MFLOP <= ( flops = opbl1( ROUT, N ) ) ) || ( TEST ) )
    {
-      resid = dottst( CACHESIZE, ROUT, TEST, N, INCX, INCY, EPSILON, TTRUST0,
+      resid = dottst( CACHESIZE, ROUT, TEST, N, INCX, INCY, EPSILON, x_offset, y_offset, TTRUST0,
 		      TTEST0, MFTRUST0, MFTEST0 );
       if( resid > THRESH ) (void) fprintf( stderr, "   resid=%f\n", resid );
    }
@@ -4876,6 +4893,8 @@ void RundotCase
    const int                  NINCY,
    const int                  * INCYS,
    const TYPE                 EPSILON,
+   const int                  x_offset,
+   const int                  y_offset,
    int                        * NPASSED,
    int                        * NTESTS
 )
@@ -4929,7 +4948,7 @@ void RundotCase
          for( ix = 0; ix < NINCX; ix++ )
          {
             ires = dotcase( CACHESIZE, ROUT, TEST, MFLOP, n, INCXS[ix],
-			    INCYS[iy], EPSILON, &ttrust, &ttest, &mftrust, &mftest );
+			    INCYS[iy], EPSILON, x_offset, y_offset, &ttrust, &ttest, &mftrust, &mftest );
             if(     !( TEST ) ) pass = "SKIP ";
             else if( ires < 0 ) pass = "NoMEM";
             else if( ires     ) pass = "PASS ";
@@ -5129,7 +5148,9 @@ void RunCases
    const int                  NINCY,
    const int                  * INCYS,
    const int                  NROUT,
-   const enum LVL1_ROUT       * ROUTS
+   const enum LVL1_ROUT       * ROUTS,
+   const int                  x_offset,
+   const int                  y_offset
 )
 {
    TYPE                       eps;
@@ -5214,7 +5235,7 @@ void RunCases
                ( ROUTS[ro] == DSDOT ) || ( ROUTS[ro] == SDSDOT ) )
       {
          RundotCase( CACHESIZE, ROUTS[ro], TEST, MFLOP, N0, NN, NINC, NINCX,
-		     INCXS, NINCY, INCYS, eps, &np, &ntests );
+		     INCXS, NINCY, INCYS, eps, x_offset, y_offset, &np, &ntests  );
       }
    }
 
@@ -5301,6 +5322,16 @@ void PrintUsage( char * nam )
    (void) fprintf( stderr, "                                        " );
    (void) fprintf( stderr, "  INCY.                                \n" );
 
+   (void) fprintf( stderr, "   -x <x_offset>                        " );
+   (void) fprintf( stderr, ". address offset for x vector          \n" );
+   (void) fprintf( stderr, "                                        " );
+   (void) fprintf( stderr, "  x offset.                            \n" );
+
+   (void) fprintf( stderr, "   -y <y_offset>                        " );
+   (void) fprintf( stderr, ". address offset for y vector          \n" );
+   (void) fprintf( stderr, "                                        " );
+   (void) fprintf( stderr, "  y offset.                            \n" );
+
    (void) fprintf( stderr, "   -T <0/1>                             " );
    (void) fprintf( stderr, ". disable computational check.  Default\n" );
    (void) fprintf( stderr, "                                        " );
@@ -5340,7 +5371,9 @@ void GetFlags
    int                        * NINCX,
    int                        ** INCXS,
    int                        * NINCY,
-   int                        ** INCYS
+   int                        ** INCYS,
+   int                        * x_offset,
+   int                        * y_offset
 )
 {
    int                        i = 1, j;
@@ -5358,6 +5391,7 @@ void GetFlags
    *N0         = -1;
    *NALPHA     = -1;
    *NINCX      = *NINCY = -1;
+   *x_offset   = *y_offset = -1;
    fprintf(stdout, "\n\n");
    for (i=0; i < NARGS; i++) fprintf(stdout, "%s ", ARGS[i]);
    fprintf(stdout, "\n\n");
@@ -5438,6 +5472,16 @@ void GetFlags
                (*INCYS)[j] = atoi( ARGS[i++] );
             }
             break;
+         case 'x':
+	   if( ARGS[i] == NULL ) PrintUsage( ARGS[0] );
+	   *x_offset = atoi( ARGS[i++] );
+	   if( *x_offset < 0 ) PrintUsage( ARGS[0] );
+	   break;
+         case 'y':
+	   if( ARGS[i] == NULL ) PrintUsage( ARGS[0] );
+	   *y_offset = atoi( ARGS[i++] );
+	   if( *y_offset < 0 ) PrintUsage( ARGS[0] );
+	   break;
 
          case 'R':
             if( ARGS[i] == NULL ) PrintUsage( ARGS[0] );
@@ -5606,6 +5650,8 @@ void GetFlags
       ATL_assert( *INCYS );
       (*INCYS)[0] = 1;
    }
+   if(*x_offset == -1) *x_offset=0;
+   if(*y_offset == -1) *y_offset=0;
 }
 
 int main( int NARGS, char **ARGS )
@@ -5613,15 +5659,16 @@ int main( int NARGS, char **ARGS )
    int                        mflopmin, ninc, nstart, nstop, nalphas,
                               cachesize, nincx, nincy, nrout, test;
    int                        * incxs  = NULL, * incys = NULL;
+   int                        x_offset, y_offset;
    TYPE                       * alphas = NULL;
    enum LVL1_ROUT             * routs  = NULL;
 
    GetFlags( NARGS, ARGS, &nrout, &routs, &test, &cachesize, &mflopmin,
              &nstart, &nstop, &ninc, &nalphas, &alphas, &nincx, &incxs,
-             &nincy, &incys );
+             &nincy, &incys , &x_offset, &y_offset);
 
    RunCases( test, cachesize, mflopmin, nstart, nstop, ninc, nalphas,
-             alphas, nincx, incxs, nincy, incys, nrout, routs );
+             alphas, nincx, incxs, nincy, incys, nrout, routs , x_offset, y_offset);
 
    if( alphas ) free( alphas );
    if( incxs  ) free( incxs  );
