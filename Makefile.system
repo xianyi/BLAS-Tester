@@ -85,11 +85,21 @@ endif
 endif
 
 ifeq ($(ARCH),Loongson)
+ifeq ($(ICC),loongcc)
+     ICCFLAGS += -loongson3 -static
+ifeq ($(BINARY),32)
+	ICCFLAGS += -n32
+else
+        ICCFLAGS += -n64
+endif
+else
+#default gcc
         ICCFLAGS += -march=mips64
 ifeq ($(BINARY),32)
 	ICCFLAGS += -mabi=n32
 else
         ICCFLAGS += -mabi=64
+endif
 endif
 endif
 
