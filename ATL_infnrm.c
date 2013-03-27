@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#include "atlas_f77.h"
 #include "atlas_misc.h"
 #include "atlas_tst.h"
 #include "atlas_level1.h"

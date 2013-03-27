@@ -111,9 +111,11 @@ endif
 ifeq ($(ARCH),sw1600)
 
 ifeq ($(NUMTHREADS), 1)
-	ICC = swompcc
-else
 	ICC = swcc
+	FC = swf90
+else
+	ICC = swompcc
+	FC = swompf90
 endif
 
 ICCFLAGS = $(CDEFS) -OPT:IEEE_arith=1 -DWALL
