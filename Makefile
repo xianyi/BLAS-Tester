@@ -1473,103 +1473,103 @@ zl3blastst_pt.o : $(HOMEdir)/l3blastst.c $(INCdep)
 
 
 xsl1blastst : $(INCdir)/atlas_type.h sl1blastst.o $(STsL1lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ sl1blastst.o $(STsL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ sl1blastst.o $(STsL1lib) $(BLASLIB) $(LIBS)
 
 xsl2blastst : $(INCdir)/atlas_type.h sl2blastst.o $(STsL2lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ sl2blastst.o $(STsL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ sl2blastst.o $(STsL2lib) $(BLASLIB) $(LIBS)
 
 xsl3blastst : $(INCdir)/atlas_type.h sl3blastst.o $(STsL3lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ sl3blastst.o $(STsL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ sl3blastst.o $(STsL3lib) $(BLASLIB) $(LIBS)
 
 
 
 xdl1blastst : $(INCdir)/atlas_type.h dl1blastst.o $(STdL1lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ dl1blastst.o $(STdL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ dl1blastst.o $(STdL1lib) $(BLASLIB) $(LIBS)
 
 xdl2blastst : $(INCdir)/atlas_type.h dl2blastst.o $(STdL2lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ dl2blastst.o $(STdL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ dl2blastst.o $(STdL2lib) $(BLASLIB) $(LIBS)
 
 xdl3blastst : $(INCdir)/atlas_type.h dl3blastst.o $(STdL3lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ dl3blastst.o $(STdL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ dl3blastst.o $(STdL3lib) $(BLASLIB) $(LIBS)
 
 
 
 xcl1blastst : $(INCdir)/atlas_type.h cl1blastst.o $(STcL1lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ cl1blastst.o $(STcL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ cl1blastst.o $(STcL1lib) $(BLASLIB) $(LIBS)
 
 xcl2blastst : $(INCdir)/atlas_type.h cl2blastst.o $(STcL2lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ cl2blastst.o $(STcL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ cl2blastst.o $(STcL2lib) $(BLASLIB) $(LIBS)
 
 xcl3blastst : $(INCdir)/atlas_type.h cl3blastst.o $(STcL3lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ cl3blastst.o $(STcL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ cl3blastst.o $(STcL3lib) $(BLASLIB) $(LIBS)
 
 
 xzl1blastst : $(INCdir)/atlas_type.h zl1blastst.o $(STzL1lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ zl1blastst.o $(STzL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ zl1blastst.o $(STzL1lib) $(BLASLIB) $(LIBS)
 
 xzl2blastst : $(INCdir)/atlas_type.h zl2blastst.o $(STzL2lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ zl2blastst.o $(STzL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ zl2blastst.o $(STzL2lib) $(BLASLIB) $(LIBS)
 
 xzl3blastst : $(INCdir)/atlas_type.h zl3blastst.o $(STzL3lib) prepare
-	$(ICC) $(ICCFLAGS) -o $(GENbin)/$@ zl3blastst.o $(STzL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o $(GENbin)/$@ zl3blastst.o $(STzL3lib) $(BLASLIB) $(LIBS)
 
 
 
 
 xsl1blastst_pt : $(INCdir)/atlas_type.h sl1blastst_pt.o $(PTsL1lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ sl1blastst_pt.o $(PTsL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ sl1blastst_pt.o $(PTsL1lib) $(BLASLIB) $(LIBS)
 
 xsl2blastst_pt : $(INCdir)/atlas_type.h sl2blastst_pt.o $(PTsL2lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ sl2blastst_pt.o $(PTsL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ sl2blastst_pt.o $(PTsL2lib) $(BLASLIB) $(LIBS)
 
 xsl3blastst_pt : $(INCdir)/atlas_type.h sl3blastst_pt.o $(PTsL3lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ sl3blastst_pt.o $(PTsL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ sl3blastst_pt.o $(PTsL3lib) $(BLASLIB) $(LIBS)
 
 
 
 xdl1blastst_pt : $(INCdir)/atlas_type.h dl1blastst_pt.o $(PTdL1lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ dl1blastst_pt.o $(PTdL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ dl1blastst_pt.o $(PTdL1lib) $(BLASLIB) $(LIBS)
 
 xdl2blastst_pt : $(INCdir)/atlas_type.h dl2blastst_pt.o $(PTdL2lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ dl2blastst_pt.o $(PTdL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ dl2blastst_pt.o $(PTdL2lib) $(BLASLIB) $(LIBS)
 
 xdl3blastst_pt : $(INCdir)/atlas_type.h dl3blastst_pt.o $(PTdL3lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ dl3blastst_pt.o $(PTdL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ dl3blastst_pt.o $(PTdL3lib) $(BLASLIB) $(LIBS)
 
 
 
 xcl1blastst_pt : $(INCdir)/atlas_type.h cl1blastst_pt.o $(PTcL1lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ cl1blastst_pt.o $(PTcL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ cl1blastst_pt.o $(PTcL1lib) $(BLASLIB) $(LIBS)
 
 xcl2blastst_pt : $(INCdir)/atlas_type.h cl2blastst_pt.o $(PTcL2lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ cl2blastst_pt.o $(PTcL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ cl2blastst_pt.o $(PTcL2lib) $(BLASLIB) $(LIBS)
 
 xcl3blastst_pt : $(INCdir)/atlas_type.h cl3blastst_pt.o $(PTcL3lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ cl3blastst_pt.o $(PTcL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ cl3blastst_pt.o $(PTcL3lib) $(BLASLIB) $(LIBS)
 
 
 
 xzl1blastst_pt : $(INCdir)/atlas_type.h zl1blastst_pt.o $(PTzL1lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ zl1blastst_pt.o $(PTzL1lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ zl1blastst_pt.o $(PTzL1lib) $(BLASLIB) $(LIBS)
 
 xzl2blastst_pt : $(INCdir)/atlas_type.h zl2blastst_pt.o $(PTzL2lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ zl2blastst_pt.o $(PTzL2lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ zl2blastst_pt.o $(PTzL2lib) $(BLASLIB) $(LIBS)
 
 xzl3blastst_pt : $(INCdir)/atlas_type.h zl3blastst_pt.o $(PTzL3lib) prepare
 	cd $(GENlib) && \
-	$(ICC) $(ICCFLAGS) -o ../$(GENbin)/$@ zl3blastst_pt.o $(PTzL3lib) $(BLASLIB) $(LIBS)
+	$(LD) $(ICCFLAGS) -o ../$(GENbin)/$@ zl3blastst_pt.o $(PTzL3lib) $(BLASLIB) $(LIBS)
 
 
 

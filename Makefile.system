@@ -9,6 +9,8 @@ ifndef FC
 FC = gfortran
 endif
 
+LD := $(FC)
+
 CODEBITS	=
 ALIGNLOOP	=	32
 
@@ -21,7 +23,7 @@ F2CDEFS		=	-DAdd_  -DStringSunStyle
 ARCHDEFS	=	-DATL_OS_Linux
 CDEFS		=	$(INCLUDES) $(F2CDEFS) $(ARCHDEFS) $(CODEBITS) -DTHREADNUM=$(NUMTHREADS)
 ICCFLAGS	=	$(CDEFS) 
-LIBS		=	-lm -lgfortran
+LIBS		=	-lm 
 
 
 ifndef TEST_BLAS
@@ -84,7 +86,7 @@ else
 endif
 endif
 
-ifeq ($(ARCH),Loongson)
+ifeq ($(ARCH),loongson)
 ifeq ($(ICC),loongcc)
      ICCFLAGS += -loongson3 -static
 ifeq ($(BINARY),32)
