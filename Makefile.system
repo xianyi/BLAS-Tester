@@ -31,7 +31,7 @@ endif
 ifndef ONLY_PERFORMANCE
 BLASLIB = ./refblas/librefblas.a $(TEST_BLAS) 
 else
-BLASLIB = ./refblas_perf/librefblas_perf.a $(TEST_BLAS) 
+BLASLIB = ./refblas_perf/librefblas.a $(TEST_BLAS) 
 endif
 
 ifndef NUMTHREADS
