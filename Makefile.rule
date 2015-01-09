@@ -21,7 +21,9 @@
 # 
 # For SW1600 CPU
 # ARCH = sw1600
-
+#
+# For ARM
+# ARCH = ARM
 
 # define BINARY=32 or BINARY=64
 #

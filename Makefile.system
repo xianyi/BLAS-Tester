@@ -84,6 +84,10 @@ else
 endif
 endif
 
+ifeq ($(ARCH), ARM)
+ICCFLAGS += -marm -mfloat-abi=hard -mfpu=neon -march=armv7-a
+endif
+
 ifeq ($(ARCH),Loongson)
         ICCFLAGS += -march=mips64
 ifeq ($(BINARY),32)
