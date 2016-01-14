@@ -88,6 +88,10 @@ ifeq ($(ARCH), ARM)
 ICCFLAGS += -marm -mfloat-abi=hard -mfpu=neon -march=armv7-a
 endif
 
+ifeq ($(ARCH), ARM64)
+		ICCFLAGS += -march=armv8-a+crc+crypto+fp+simd
+endif
+
 ifeq ($(ARCH),Loongson)
         ICCFLAGS += -march=mips64
 ifeq ($(BINARY),32)

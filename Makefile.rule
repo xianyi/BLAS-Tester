@@ -24,7 +24,11 @@
 #
 # For ARM
 # ARCH = ARM
+#
+# For ARM 64-bit
+# ARCH = ARM64
 
+#
 # define BINARY=32 or BINARY=64
 #
 # BINARY=64
