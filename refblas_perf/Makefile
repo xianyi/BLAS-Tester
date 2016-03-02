@@ -1,7 +1,7 @@
 TOPDIR = ..
 include $(TOPDIR)/Makefile.system
 
-TARGET=librefblas.a
+TARGETLIB=librefblas.a
 FFLAGS = $(ICCFLAGS)
 
 SUFFIX=o
@@ -156,11 +156,11 @@ endif
 OBJS= $(SBLASOBJS) $(DBLASOBJS) $(CBLASOBJS) $(ZBLASOBJS)
 
 .PHONY: all
-all:$(TARGET)
+all:$(TARGETLIB)
 
-$(TARGET):$(OBJS)
+$(TARGETLIB):$(OBJS)
 	$(AR) $(ARFLAGS) $@  $^
 	$(RANLIB)  $@ 
 
 clean:
-	$(RM) *.o $(TARGET)
+	$(RM) *.o $(TARGETLIB)
