@@ -13,7 +13,7 @@ CODEBITS	=
 ALIGNLOOP	=	32
 
 HOMEdir		=	.
-INCdir		=	$(HOMEdir)/include
+INCdir		=	$(TOPDIR)/include
 GENlib		=	.
 GENbin		=	$(HOMEdir)/bin
 INCLUDES	=	-I$(INCdir)
