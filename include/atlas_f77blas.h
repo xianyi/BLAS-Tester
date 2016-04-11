@@ -57,6 +57,7 @@
 #define F77_VOID_FUN           extern void              /* subroutine */
 #define F77_INT_FUN            extern int         /* integer function */
 #define F77_TYPE_FUN           extern TYPE           /* real function */
+#define F77_COMPLEX_TYPE_FUN   extern TYPE _Complex   /* complex function */
 #define F77_DBLE_FUN           extern double         /* dble function */
 #endif
 
@@ -881,10 +882,10 @@ F77_VOID_FUN    F77dotu
 (F77_SINOUT_DECL ,   F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
 #else
-F77_TYPE_FUN    F77dotc
+F77_COMPLEX_TYPE_FUN    F77dotc
 ( F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
-F77_TYPE_FUN    F77dotu
+F77_COMPLEX_TYPE_FUN    F77dotu
 ( F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
 #endif
@@ -1099,10 +1100,10 @@ F77_VOID_FUN    F77dotuf
 (F77_SINOUT_DECL ,   F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
 #else
-F77_TYPE_FUN    F77dotcf
+F77_COMPLEX_TYPE_FUN    F77dotcf
 ( F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
-F77_TYPE_FUN    F77dotuf
+F77_COMPLEX_TYPE_FUN    F77dotuf
 ( F77_INT_DECL,    F77_VIN_DECL,    F77_INT_DECL,    F77_VIN_DECL,
   F77_INT_DECL );
 #endif

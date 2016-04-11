@@ -55,6 +55,6 @@ void Mjoin( PATL, f77dotu_subf )
 #ifdef RETURN_BY_STACK
    F77dotuf( DOT, &F77N, X, &F77incx, Y, &F77incy);
 #else
-   *DOT=F77dotuf( &F77N, X, &F77incx, Y, &F77incy);
+   *((TYPE _Complex *)(DOT))=F77dotuf( &F77N, X, &F77incx, Y, &F77incy);
 #endif
 }
