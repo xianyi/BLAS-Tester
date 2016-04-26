@@ -101,6 +101,13 @@ else
 endif
 endif
 
+ifeq ($(ARCH),MIPS)
+ifeq ($(BINARY),32)
+    ICCFLAGS += -mabi=32
+else
+    ICCFLAGS += -mabi=64
+endif
+endif
 
 ifneq ($(NUMTHREADS), 1)
 LIBS += -lpthread
@@ -131,6 +138,7 @@ else
 endif
 
 
-AR=ar
+AR=$(AR)
 ARFLAGS=cr
-RANLIB=ranlib
+RANLIB=$(RANLIB)
+ICCFLAGS+=$(CFLAGS)
