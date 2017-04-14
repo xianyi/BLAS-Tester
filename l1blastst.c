@@ -4579,7 +4579,7 @@ void RunsclCase
                    "TST#    N ALPHA INCX   TIME MFLOP  SpUp  TEST\n" );
    (void) fprintf( stdout, "%s",
                    "==== ==== ===== ==== ====== ===== ===== =====\n" );
-   form = "%4d %d %5.1f %4d %e %e %5.2f %5s\n";
+   form = "%4d %d %5.1f %4d %6.2f %5.1f %5.2f %5s\n";
 #else
    (void) fprintf( stdout, "\n%s\n",
              "--------------------- SCAL ------------------------" );
@@ -4587,7 +4587,7 @@ void RunsclCase
              "TST#    N       ALPHA INCX   TIME MFLOP  SpUp  TEST\n" );
    (void) fprintf( stdout, "%s",
              "==== ==== ===== ===== ==== ====== ===== ===== =====\n" );
-   form = "%4d %d %5.1f %5.1f %4d %e %e %5.2f %5s\n";
+   form = "%4d %d %5.1f %5.1f %4d %6.2f %5.1f %5.2f %5s\n";
 #endif
 
    for( nn = N0; nn <= NN; nn += NINC )
