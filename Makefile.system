@@ -101,6 +101,9 @@ else
 endif
 endif
 
+ifeq ($(ARCH), C910V)
+     ICCFLAGS += -static -march=rv64gcvxthead -mabi=lp64v
+endif
 
 ifneq ($(NUMTHREADS), 1)
 LIBS += -lpthread

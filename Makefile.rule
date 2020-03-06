@@ -27,6 +27,9 @@
 #
 # For ARM 64-bit
 # ARCH = ARM64
+#
+# For C-SKY C910V
+# ARCH = C910V
 
 #
 # define BINARY=32 or BINARY=64
