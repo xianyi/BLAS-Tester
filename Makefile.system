@@ -102,7 +102,7 @@ endif
 endif
 
 ifeq ($(ARCH), C910V)
-     ICCFLAGS += -static -march=rv64gcvxthead -mabi=lp64v
+     ICCFLAGS += -static -march=rv64imafdcv0p7_zfh_xtheadc -mabi=lp64d -mtune=c920
 endif
 
 ifneq ($(NUMTHREADS), 1)
